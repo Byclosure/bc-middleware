@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["info@byclosure.com"]
   gem.description   = %q{Library to get a middleware implementation (REST api), with support a search, etc. fast}
   gem.summary       = %q{Library to get a middleware implementation (REST api), with support a search, etc. fast}
-  gem.homepage      = "github.com/Byclosure/bc-middleware"
+  gem.homepage      = "http://github.com/Byclosure/bc-middleware"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
