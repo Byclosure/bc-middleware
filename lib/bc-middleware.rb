@@ -7,7 +7,7 @@ end
 
 class ActionController::Base
   def self.bc_middleware(options={})
-    inherited_resources
+    inherit_resources
     include BcMiddleware::SearchApi
   end
 end
