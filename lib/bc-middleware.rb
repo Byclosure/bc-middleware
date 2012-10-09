@@ -1,4 +1,5 @@
 require "bc-middleware/version"
+require "inherited_resources"
 
 module BcMiddleware
   autoload :SearchApi, 'bc-middleware/search_api'
