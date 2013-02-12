@@ -5,16 +5,34 @@ module BcMiddleware
     def collection
 	    get_collection_ivar || begin
 	      c = end_of_association_chain
+
 	      if respond_to?(:search_terms) && (terms = search_terms).present?
-	        c = c.search(terms)
-	      end
+          c = c.search(terms)
+        end
+
+        if respond_to?(:page_term) && page_term.present? && respond_to?(:per_term) && per_term.present?
+          if c.respond_to?(:scoped)
+            c = c.search.page(page_term).per(per_term)
+          else
+            c = c.page(page_term).per(per_term)
+          end
+        end
+
 	      set_collection_ivar(c.respond_to?(:scoped) ? c.scoped : c.all)
 	    end
 	  end
 
 	  def search_terms
 	    params[:search]
-	  end
+    end
+
+    def page_term
+      params[:paginate][:page]
+    end
+
+    def per_term
+      params[:paginate][:per]
+    end
 
 	  def attribute_fields
 	    params[:fields].present? ? params[:fields] : resource_class_attributes
