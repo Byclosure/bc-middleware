@@ -10,7 +10,7 @@ module BcMiddleware
           c = c.search(terms)
         end
 
-        if respond_to?(:page_term) && page_term.present? && respond_to?(:per_term) && per_term.present?
+        if paginate_terms.present? && page_term.present? && per_term.present?
           if c.respond_to?(:scoped)
             c = c.search.page(page_term).per(per_term)
           else
@@ -26,12 +26,16 @@ module BcMiddleware
 	    params[:search]
     end
 
+    def paginate_terms
+      params[:paginate]
+    end
+
     def page_term
-      params[:paginate][:page]
+      paginate_terms[:page]
     end
 
     def per_term
-      params[:paginate][:per]
+      paginate_terms[:per]
     end
 
 	  def attribute_fields
